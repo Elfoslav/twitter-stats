@@ -16,8 +16,7 @@
       </p>
 
       {{#if loadingTweets}}
-        loading...
-
+        <p>Getting data from Twitter... it might take a few seconds... please wait</p>
       {{else}}
         <h3>Your most used hashtags from the last {{numOfTweets}} tweets are:</h3>
       {{/if}}
@@ -38,7 +37,7 @@
         </script>
         <br><br>
       {{/unless}}
-      
+
       {{#each tweets}}
         <p>
           <img src="{{user.profile_image_url_https}}" alt="image">
