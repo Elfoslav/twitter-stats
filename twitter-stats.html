@@ -1,0 +1,60 @@
+<head>
+  <title>Twitter stats</title>
+  <meta name="description" content="Find out what are your most used #hashtags">
+</head>
+
+<body>
+  {{> hello}}
+</body>
+
+<template name="hello">
+  <div class="container">
+    {{#if currentUser}}
+      <br>
+      <p>
+        <button class="sign-out btn btn-default">Sign out</button>
+      </p>
+
+      {{#if loadingTweets}}
+        loading...
+
+      {{else}}
+        <h3>Your most used hashtags from the last {{numOfTweets}} tweets are:</h3>
+      {{/if}}
+
+      <p>
+        {{#each hashtags}}
+          <a class="label label-primary" href="https://twitter.com/search?q=%23{{text}}">{{text}} ({{count}})</a>
+        {{/each}}
+      </p>
+
+      {{#unless loadingTweets}}
+        <a class="twitter-share-button"
+          href="https://twitter.com/share" data-text="{{tweetText}}">
+        Tweet
+        </a>
+        <script type="text/javascript">
+        window.twttr=(function(d,s,id){var t,js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return}js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);return window.twttr||(t={_e:[],ready:function(f){t._e.push(f)}})}(document,"script","twitter-wjs"));
+        </script>
+        <br><br>
+      {{/unless}}
+      
+      {{#each tweets}}
+        <p>
+          <img src="{{user.profile_image_url_https}}" alt="image">
+          <a href="https://twitter.com/{{user.screen_name}}">{{user.screen_name}}</a>:
+          {{text}}
+        </p>
+      {{/each}}
+      {{stats}}
+    {{else}}
+      <br/>
+      <p>
+        Find out what are your most used #hashtags from your last {{numOfTweets}} tweets
+      </p>
+      <p><button class="sign-in btn btn-default">Sign in</button></p>
+    {{/if}}
+
+    <p>See <a href="https://github.com/Elfoslav/twitter-stats">Github repo</a></p>
+  </div>
+</template>
